@@ -5,7 +5,7 @@ const AboutMe = () => {
         <p>I'm a fullstack web developer passionate about solving complex problems.</p>
         <p>I've developed this site for educational purposes.</p>
         <p>But feel free to sign up and upload any fancy recipes you have!</p>
-        <p>If you have any questions contact me at <u>murdzhev.petar@gmail.com</u></p>
+        <p>If you have any questions contact me at <u>murdzhevpetar@gmail.com</u></p>
 
     </div>
   )

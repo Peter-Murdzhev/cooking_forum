@@ -14,7 +14,7 @@ const TermsOfUse = () => {
               No plagiarism or copyrighted material without permission!</li>
             <li>Ensure the recipes are clear and safe to follow.</li>
             <li>No misleading or dangerous cooking advice!</li>
-            <li>Forum admins have the right to edit or remove posts that violate rules.</li>
+            <li>Site admins have the right to edit or remove posts that violate rules.</li>
         </ol>
     </div>
   )
