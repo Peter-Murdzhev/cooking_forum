@@ -5,12 +5,13 @@ const ScrollRestoration = () => {
   const location = useLocation();
 
   useEffect(() => {
-    let scrollY = window.history.state?.scrollY ?? 0; // Try preserving from navigation state
+    let scrollY = (window.history.state?.scrollY ?? parseInt(sessionStorage.getItem("scrollY"))) || 0; // Try preserving from navigation state
     setTimeout(() => {
       window.scrollTo(0, scrollY);
     }, 100);
 
     const handleScroll = () => {
+      sessionStorage.setItem("scrollY", window.scrollY);
       window.history.replaceState({ scrollY: window.scrollY }, "");
     };
 

@@ -535,8 +535,17 @@ body {
 
 	}
 
-	#latest_reccipes {
+	#header h1{
+		font-size: 30px;
+	}
+
+	#header h3{
+		font-size: 17px;
+	}
+
+	#latest_recipes {
 		text-align: center;
+		margin-left: 45px;
 	}
 
 	#recipes_list {
