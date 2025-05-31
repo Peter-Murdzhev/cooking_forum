@@ -17,7 +17,7 @@ const RecipesPage = () => {
   }
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/dish/find/all")
+    axios.get("/api/v1/dish/find/all")
       .then((response) => {
         setRecipes(response.data);
       })

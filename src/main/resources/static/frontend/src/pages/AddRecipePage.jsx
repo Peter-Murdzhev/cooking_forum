@@ -22,7 +22,7 @@ const AddRecipePage = () => {
     formData.append("image", image);
 
     try {
-      const result = await axios.post("http://localhost:8080/api/v1/image/upload", formData, {
+      const result = await axios.post("/api/v1/image/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
         withCredentials: true
       })
@@ -50,7 +50,7 @@ const AddRecipePage = () => {
     };
 
     try {
-      const result = await axios.post("http://localhost:8080/api/v1/dish/add", payload, {
+      const result = await axios.post("/api/v1/dish/add", payload, {
         withCredentials: true
       })
 

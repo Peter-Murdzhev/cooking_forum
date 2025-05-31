@@ -20,7 +20,7 @@ const RecipeFullVersionPage = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const result = await axios.get(`http://localhost:8080/api/v1/dish/find/id/${id}`);
+        const result = await axios.get(`/api/v1/dish/find/id/${id}`);
         setRecipe(result.data);
 
         if (result.data && result.data?.ownerOfDishId) {
@@ -40,7 +40,7 @@ const RecipeFullVersionPage = () => {
     const fetchUser = async (id) => {
       try {
         const result2 = await axios.get
-          (`http://localhost:8080/api/v1/user/findbyid/${id}`)
+          (`/api/v1/user/findbyid/${id}`)
         setUser(result2.data);
       } catch (error) {
         console.log("Error fetching user");
@@ -55,7 +55,7 @@ const RecipeFullVersionPage = () => {
       try {
         if (recipe && auth.user) {
           const result = await
-            axios.get(`http://localhost:8080/api/v1/user/${auth.user.id}/dish/isfavourite/${recipe.id}`, {
+            axios.get(`/api/v1/user/${auth.user.id}/dish/isfavourite/${recipe.id}`, {
               withCredentials: true
             });
           //this could be one line setIsFavourite(result.data)
@@ -90,14 +90,14 @@ const RecipeFullVersionPage = () => {
         if (isFavourite) {
           const result = await
             axios.delete
-              (`http://localhost:8080/api/v1/user/${auth.user.id}/delete/favouriteDish/${recipe.id}`, {
+              (`/api/v1/user/${auth.user.id}/delete/favouriteDish/${recipe.id}`, {
                 withCredentials: true
               });
 
           setIsFavourite(false);
         } else {
           const result = await
-            axios.post(`http://localhost:8080/api/v1/user/${auth.user.id}/add/favouritedish/${recipe.id}`, {},
+            axios.post(`/api/v1/user/${auth.user.id}/add/favouritedish/${recipe.id}`, {},
               { withCredentials: true })
 
           setIsFavourite(true);
@@ -114,7 +114,7 @@ const RecipeFullVersionPage = () => {
     try {
       const isConfirmed = window.confirm("Are you sure you want to delete this recipe?");
       if (isConfirmed) {
-        await axios.delete(`http://localhost:8080/api/v1/dish/delete/${recipe.id}`,
+        await axios.delete(`/api/v1/dish/delete/${recipe.id}`,
           { withCredentials: true });
         navigate(-1);
       }

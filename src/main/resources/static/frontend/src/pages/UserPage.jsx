@@ -8,7 +8,7 @@ const UserPage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/v1/user/findbyid/${id}`)
+    axios.get(`/api/v1/user/findbyid/${id}`)
       .then(response => {
         setUser(response.data);
       }).catch(error => {

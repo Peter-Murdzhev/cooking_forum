@@ -11,7 +11,7 @@ const UploadedRecipes = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/v1/dish/find/userid/${auth.user.id}`)
+        axios.get(`/api/v1/dish/find/userid/${auth.user.id}`)
             .then(response => {
                 setRecipes(response.data);
             }

@@ -13,7 +13,7 @@ const Comments = ({ recipe, setRecipe }) => {
     const addComment = async (e) => {
         e.preventDefault()
 
-        axios.put(`http://localhost:8080/api/v1/dish/add/comment/${recipe.id}`,
+        axios.put(`/api/v1/dish/add/comment/${recipe.id}`,
             newCommentMessage, {
             headers: {
                 "Content-Type": "text/plain"
@@ -30,7 +30,7 @@ const Comments = ({ recipe, setRecipe }) => {
         const isConfirmed = window.confirm("Are you sure you want to delete this comment?")
 
         if(isConfirmed){
-            axios.delete(`http://localhost:8080/api/v1/dish/${recipe.id}/remove/comment/${index}`,
+            axios.delete(`/api/v1/dish/${recipe.id}/remove/comment/${index}`,
             {withCredentials: true})
             .then(response => {
                 setRecipe(response.data);
@@ -42,7 +42,7 @@ const Comments = ({ recipe, setRecipe }) => {
     useEffect(() => {
         const userIds = recipe.dishComments.map(comment => comment.userId);
 
-        axios.post("http://localhost:8080/api/v1/user/many/existsbyid",
+        axios.post("/api/v1/user/many/existsbyid",
             userIds, { withCredentials: true }
         ).then(response => {
             setUserExistsMap(response.data);

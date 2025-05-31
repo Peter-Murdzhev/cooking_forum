@@ -8,7 +8,7 @@ const FavouriteRecipes = () => {
     const auth = useAuth();
     
     useEffect(() =>{
-        axios.get(`http://localhost:8080/api/v1/user/${auth.user.id}/get/favouritedishes`,
+        axios.get(`/api/v1/user/${auth.user.id}/get/favouritedishes`,
             {withCredentials: true}
         ).then(response => setRecipes(response.data)
         ).catch(error => console.log(error));

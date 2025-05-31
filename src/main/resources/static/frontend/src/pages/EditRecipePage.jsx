@@ -13,7 +13,7 @@ const EditRecipePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/v1/dish/find/id/${id}`, { withCredentials: true })
+    axios.get(`/api/v1/dish/find/id/${id}`, { withCredentials: true })
       .then(response => setRecipe(response.data))
       .catch(() => navigate("/recipes_page"));
   }, [id])
@@ -23,7 +23,7 @@ const EditRecipePage = () => {
     if (recipe?.imageSource) {
       imageName = recipe.imageSource.substring(recipe.imageSource.lastIndexOf("/") + 1);
 
-      axios.get(`http://localhost:8080/api/v1/image/download/${imageName}`, {
+      axios.get(`/api/v1/image/download/${imageName}`, {
         responseType: "blob",
         withCredentials: true
       })
@@ -53,7 +53,7 @@ const EditRecipePage = () => {
         formData.append("image", image);
 
         try {
-          response = await axios.post(`http://localhost:8080/api/v1/image/replace/${currentImageName}`,
+          response = await axios.post(`/api/v1/image/replace/${currentImageName}`,
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
@@ -71,7 +71,7 @@ const EditRecipePage = () => {
         formData.append("image", image);
 
         try {
-          response = await axios.post("http://localhost:8080/api/v1/image/upload", formData, {
+          response = await axios.post("/api/v1/image/upload", formData, {
             headers: { "Content-Type": "multipart/form-data" },
             withCredentials: true
           })
@@ -92,7 +92,7 @@ const EditRecipePage = () => {
     }
 
     try {
-      const result = await axios.put(`http://localhost:8080/api/v1/dish/alter/${recipe.id}`, payload, {
+      const result = await axios.put(`/api/v1/dish/alter/${recipe.id}`, payload, {
         withCredentials: true
       })
 

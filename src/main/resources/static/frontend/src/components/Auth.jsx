@@ -9,7 +9,7 @@ const AuthProvider = ({children}) =>{
     useEffect(() =>{
         const checkSession = async () =>{
             try{
-                const auth = await axios.get("http://localhost:8080/api/v1/auth/check-auth",
+                const auth = await axios.get("/api/v1/auth/check-auth",
                     {withCredentials:true});
 
                 setUser(auth.data);
