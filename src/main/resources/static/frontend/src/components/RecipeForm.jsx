@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { FiX } from "react-icons/fi";
 
 const RecipeForm = ({ image, setImage, recipeData, setRecipeData, onSubmit, mode, errors }) => {
@@ -60,7 +60,7 @@ const RecipeForm = ({ image, setImage, recipeData, setRecipeData, onSubmit, mode
                     <img
                         src={URL.createObjectURL(image)}
                         alt="Preview"
-                        style={{ maxWidth: '200px', marginTop: '5px' }}
+                        style={{ maxWidth: '250px', maxHeight: "200px", marginTop: '5px' }}
                     />
                 )}
                 <br /><br />

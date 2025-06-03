@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import RecipeForm from '../components/RecipeForm'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useAuth } from '../components/Auth';
 import axios from 'axios';
 
 const EditRecipePage = () => {
   const { id } = useParams();
-  const [recipe, setRecipe] = useState(null);
   const [image, setImage] = useState(null)
+  const [recipe, setRecipe] = useState(null);
   const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
@@ -26,15 +25,13 @@ const EditRecipePage = () => {
       axios.get(`/api/v1/image/download/${imageName}`, {
         responseType: "blob",
         withCredentials: true
-      })
-
-        .then(response => {
+      }
+      ).then(response => {
           setImage(response.data);
-        })
-        .catch(error => console.log(error));
+        }
+      ).catch(error => console.log(error));
     }
-  }, [recipe])
-
+  }, [recipe?.imageSource])
 
   if (!recipe) {
     return <h2 style={{ textAlign: "center" }}>Loading recipe...</h2>

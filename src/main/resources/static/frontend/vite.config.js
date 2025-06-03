@@ -13,6 +13,7 @@ export default defineConfig({
         changeOrigin: true,
         secure: false
       },
+      "/images": "http://localhost:8080",
     },
   },
 });

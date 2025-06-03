@@ -9,6 +9,8 @@ const Recipe = ({ recipe }) => {
 		if(recipe.imageSource){
 			setImagePath(recipe.imageSource);
 		}
+
+		console.log(recipe.imageSource)
 	},[recipe.imageSource])
 
 	useEffect(() =>{

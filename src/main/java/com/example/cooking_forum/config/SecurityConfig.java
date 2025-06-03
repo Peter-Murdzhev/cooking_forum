@@ -33,6 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/dish/find/**").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/", "/frontend/**").permitAll()
+                        .requestMatchers( "images/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)

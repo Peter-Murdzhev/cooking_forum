@@ -17,7 +17,7 @@ public class FileService {
         //this path won't work in production. Only when the project is launched
         //from IDE or the command prompt
         String filePath = System.getProperty("user.dir").replace("\\", "/") +
-                "/src/main/resources/static/frontend/public/images/recipes_pics/" +
+                "/images/recipes_pics/" +
                 file.getOriginalFilename();
 
         file.transferTo(new File(filePath));
@@ -25,14 +25,14 @@ public class FileService {
 
     public byte[] downloadImageFromFileSystem(String filename) throws IOException {
        String filePath = System.getProperty("user.dir").replace("\\", "/") +
-               "/src/main/resources/static/frontend/public/images/recipes_pics/" + filename;
+               "/images/recipes_pics/" + filename;
 
        return Files.readAllBytes(new File(filePath).toPath());
     }
 
     public void replaceImage(String oldImageName, MultipartFile newImage) throws IOException {
         String mainDir = System.getProperty("user.dir").replace("\\", "/") +
-                "/src/main/resources/static/frontend/public/images/recipes_pics/";
+                "/images/recipes_pics/";
 
         String archiveDir = mainDir + "archive/";
 

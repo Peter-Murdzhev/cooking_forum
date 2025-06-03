@@ -8,7 +8,7 @@ const ScrollRestoration = () => {
     let scrollY = window.history.state?.scrollY ?? 0; // Try preserving from navigation state
     setTimeout(() => {
       window.scrollTo(0, scrollY);
-    }, 400);
+    }, 300);
 
     const handleScroll = () => {
       window.history.replaceState({ scrollY: window.scrollY }, "");
