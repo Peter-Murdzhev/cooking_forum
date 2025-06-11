@@ -21,7 +21,9 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+    private final CustomBasicAuthenticationEntryPoint entryPoint;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -39,14 +41,7 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                                 .sessionFixation().migrateSession())
                 .exceptionHandling(ex ->
-                        ex.authenticationEntryPoint(
-                                (request, response,
-                                 authException) -> {
-                                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                                    response.setContentType("application/json");
-                                    response.getWriter().write
-                                            ("{\"authentication\": \"Username or password incorrect!\"}");
-                                }))
+                        ex.authenticationEntryPoint(entryPoint))
                 .httpBasic(Customizer.withDefaults())
                 .cors(Customizer.withDefaults())
                 .formLogin(AbstractHttpConfigurer::disable)

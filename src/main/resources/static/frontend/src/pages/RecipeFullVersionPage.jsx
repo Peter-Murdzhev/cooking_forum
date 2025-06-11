@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../components/Auth';
 import { MdFavorite } from 'react-icons/md';
@@ -12,7 +12,7 @@ const RecipeFullVersionPage = () => {
   const [user, setUser] = useState(null);
   const [imagePath, setImagePath] = useState("/images/recipes_pics/default_image.jpg")
   const [isFavourite, setIsFavourite] = useState(false);
- 
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -157,7 +157,7 @@ const RecipeFullVersionPage = () => {
         </div>
       }
 
-      <Comments recipe={recipe} setRecipe={setRecipe}/>
+      <Comments recipe={recipe} setRecipe={setRecipe} />
     </div>
   )
 }

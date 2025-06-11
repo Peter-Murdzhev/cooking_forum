@@ -13,18 +13,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-//Doesn't work. Working version is set directly into SecurityConfig
-//@Component
-//public class CustomBasicAuthenticationEntryPoint implements AuthenticationEntryPoint {
-//    @Override
-//    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-//        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-//        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-//
-//        Map<String, String> error = new HashMap<>();
-//        error.put("authentication", "Username or password incorrect!");
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        mapper.writeValue(response.getOutputStream(), error);
-//    }
-//}
+@Component
+public class CustomBasicAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.getWriter().write
+                ("{\"authentication\": \"Username or password incorrect!\"}");
+    }
+}
