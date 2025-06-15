@@ -1,5 +1,7 @@
 html {
+  /* these two options fix issues with scroll restoration on mobile */
   scroll-behavior: auto !important;
+  overflow-anchor: none !important;
 }
 
 body {

@@ -15,6 +15,7 @@ public class WebConfig implements WebMvcConfigurer{
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins("http://localhost:5500")
+//                        .allowedOriginPatterns("https://*.serveo.net")
                         .allowedMethods("*")
                         .allowedHeaders("*")
                         .allowCredentials(true);

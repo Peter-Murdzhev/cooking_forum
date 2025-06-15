@@ -15,5 +15,6 @@ export default defineConfig({
       },
       "/images": "http://localhost:8080",
     },
+
   },
 });

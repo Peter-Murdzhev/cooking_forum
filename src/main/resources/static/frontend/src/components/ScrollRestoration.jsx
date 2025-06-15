@@ -6,31 +6,29 @@ const ScrollRestoration = () => {
   const scrollPositions = useRef({});
   const isInitialLoad = useRef(true);
   const scrollLock = useRef(false);
-  const shouldRestore = !location.pathname.startsWith('/recipe/');
 
   // Store scroll position
   useEffect(() => {
     const handleScroll = () => {
       if (!scrollLock.current) {
-        scrollPositions.current[location.pathname] = window.scrollY;
+        scrollPositions.current[location.key] = window.scrollY;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [location.pathname]);
+  }, [location.key]);
 
   // Restore scroll position
   useEffect(() => {
-    if (isInitialLoad.current || !shouldRestore) {
+    if (isInitialLoad.current) {
       isInitialLoad.current = false;
       return;
     }
 
-    const scrollY = scrollPositions.current[location.pathname] || 0;
+    const scrollY = scrollPositions.current[location.key] || 0;
     scrollLock.current = true;
 
-    // Mobile-optimized restoration sequence
     const restoreScroll = (attempt = 0) => {
       window.scrollTo({ top: scrollY, behavior: 'instant' });
 
@@ -39,7 +37,7 @@ const ScrollRestoration = () => {
         const delta = Math.abs(currentPos - scrollY);
 
         if (delta > 5 && attempt < 4) {
-          setTimeout(() => restoreScroll(attempt + 1), [0, 50, 100, 150][attempt]);
+          setTimeout(() => restoreScroll(attempt + 1), [0, 50, 100, 200][attempt]);
         } else {
           scrollLock.current = false;
         }
@@ -49,7 +47,7 @@ const ScrollRestoration = () => {
     };
 
     restoreScroll();
-  }, [location.key, shouldRestore]);
+  }, [location.key]);
 
   return null;
 };
