@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Recipe = ({ recipe }) => {
-	const [imagePath, setImagePath] = useState("/images/recipes_pics/default_image.jpg")
+	const [imagePath, setImagePath] = useState("/default_image.jpg")
 	const [description, setDescription] = useState("");
 
 	useEffect(() =>{

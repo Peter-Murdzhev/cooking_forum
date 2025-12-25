@@ -56,23 +56,27 @@ const RecipeForm = ({ image, setImage, recipeData, setRecipeData, onSubmit, mode
                         onChange={handleImageChange}></input>
                 </label>
                 <br /><br />
-                {image && (
-                    <img
-                        src={URL.createObjectURL(image)}
-                        alt="Preview"
-                        style={{ maxWidth: '250px', maxHeight: "200px", marginTop: '5px' }}
-                    />
-                )}
+
+                {
+                    (image || recipeData?.imageSource) && (
+                        <img
+                            src={image ? URL.createObjectURL(image) : recipeData?.imageSource}
+                            alt="Preview"
+                            style={{ maxWidth: '250px', maxHeight: "200px", marginTop: '5px' }}
+                        />
+                    )
+                }
+
                 <br /><br />
 
                 <input name="name" type="text" value={recipeData.name}
                     onChange={handleInputChange} placeholder="Recipe name"></input>
                 <br />
-                {errors.name ? <>{errors.name}<br /><br/></> : <br />}
+                {errors.name ? <>{errors.name}<br /><br /></> : <br />}
                 <textarea name="description" value={recipeData.description}
                     onChange={handleInputChange} placeholder="Description"></textarea>
                 <br />
-                {errors.description ? <>{errors.description}<br /><br/></> : <br />}
+                {errors.description ? <>{errors.description}<br /><br /></> : <br />}
                 <label>Ingredients:</label>
                 <ol>
                     {recipeData.ingredients.map((ingredient, index) =>
@@ -89,11 +93,11 @@ const RecipeForm = ({ image, setImage, recipeData, setRecipeData, onSubmit, mode
                 <input type="button" value="Add" onClick={handleAddIngredient}
                     style={{ width: "100px", height: "32px", marginLeft: "5px" }}></input>
                 <br />
-                {errors.ingredients ? <>{errors.ingredients}<br /><br/></> : <br />}
+                {errors.ingredients ? <>{errors.ingredients}<br /><br /></> : <br />}
                 <textarea name="howToPrepare" value={recipeData.howToPrepare}
                     onChange={handleInputChange} placeholder="How to prepare" ></textarea>
                 <br />
-                {errors.howToPrepare ? <>{errors.howToPrepare}<br /><br/></> : <br />}
+                {errors.howToPrepare ? <>{errors.howToPrepare}<br /><br /></> : <br />}
                 <button type="submit">Submit</button>
             </form>
         </div>

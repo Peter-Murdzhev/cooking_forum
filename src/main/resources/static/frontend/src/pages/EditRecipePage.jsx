@@ -17,22 +17,6 @@ const EditRecipePage = () => {
       .catch(() => navigate("/recipes_page"));
   }, [id])
 
-  useEffect(() => {
-    let imageName;
-    if (recipe?.imageSource) {
-      imageName = recipe.imageSource.substring(recipe.imageSource.lastIndexOf("/") + 1);
-
-      axios.get(`/api/v1/image/download/${imageName}`, {
-        responseType: "blob",
-        withCredentials: true
-      }
-      ).then(response => {
-          setImage(response.data);
-        }
-      ).catch(error => console.log(error));
-    }
-  }, [recipe?.imageSource])
-
   if (!recipe) {
     return <h2 style={{ textAlign: "center" }}>Loading recipe...</h2>
   }
@@ -42,18 +26,15 @@ const EditRecipePage = () => {
     let response;
 
     if (recipe?.imageSource) {
-      const currentImageName = recipe.imageSource.
-        substring(recipe.imageSource.lastIndexOf("/") + 1);
-
-      if (image?.name && currentImageName !== image.name) {
+      if (image) {
         const formData = new FormData();
         formData.append("image", image);
+        formData.append("oldImageId", recipe.imagePublicId);
 
         try {
-          response = await axios.post(`/api/v1/image/replace/${currentImageName}`,
+          response = await axios.post("/api/v1/image/replace",
             formData,
             {
-              headers: { "Content-Type": "multipart/form-data" },
               withCredentials: true
             }
           )
@@ -68,7 +49,7 @@ const EditRecipePage = () => {
         formData.append("image", image);
 
         try {
-          response = await axios.post("/api/v1/image/upload", formData, {
+            response = await axios.post("/api/v1/image/upload", formData, {
             headers: { "Content-Type": "multipart/form-data" },
             withCredentials: true
           })
@@ -79,13 +60,17 @@ const EditRecipePage = () => {
     }
 
     let imagePath = recipe.imageSource;
+    let imageId = recipe.imagePublicId;
+
     if (response?.data) {
-      imagePath = response.data;
+      imagePath = response.data.imagePath;
+      imageId = response.data.imagePublicId;
     }
 
     const payload = {
       ...recipe,
-      imageSource: imagePath
+      imageSource: imagePath,
+      imagePublicId: imageId,
     }
 
     try {

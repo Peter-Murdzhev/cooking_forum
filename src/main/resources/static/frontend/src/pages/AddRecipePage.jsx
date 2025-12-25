@@ -10,7 +10,8 @@ const AddRecipePage = () => {
     description: "",
     ingredients: [],
     howToPrepare: "",
-    imageSource: ""
+    imageSource: "",
+    imagePublicId: ""
   })
   const [errors, setErrors] = useState({});
 
@@ -35,9 +36,17 @@ const AddRecipePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let imagePath = recipeData.imageSource;
+    let imageId = recipeData.imagePublicId;
 
     if (image) {
-      imagePath = await uploadImage();
+      try {
+        const response = await uploadImage();
+
+        imagePath = response.imagePath;
+        imageId = response.imagePublicId;
+      } catch (error) {
+        console.log("Error uploading image");
+      }
     }
 
     //Don't set the state directly when assigning imagePath
@@ -45,7 +54,8 @@ const AddRecipePage = () => {
     //of the api call. Instead use the payload below.
     const payload = {
       ...recipeData,
-      imageSource: imagePath
+      imageSource: imagePath,
+      imagePublicId: imageId,
     };
 
     try {
@@ -57,7 +67,7 @@ const AddRecipePage = () => {
         navigate(`/recipe/${result.data.id}`);
       }
     } catch (error) {
-      if(error?.response){
+      if (error?.response) {
         setErrors(error.response.data);
       }
     }

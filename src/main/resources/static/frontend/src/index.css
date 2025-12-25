@@ -12,7 +12,7 @@ body {
 }
 
 #header {
-	background-image: url("/images/dishes_header_pic.jpg");
+	background-image: url("/dishes_header_pic.jpg");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;

@@ -10,7 +10,7 @@ const RecipeFullVersionPage = () => {
   const auth = useAuth();
   const [recipe, setRecipe] = useState(null);
   const [user, setUser] = useState(null);
-  const [imagePath, setImagePath] = useState("/images/recipes_pics/default_image.jpg")
+  const [imagePath, setImagePath] = useState("/default_image.jpg")
   const [isFavourite, setIsFavourite] = useState(false);
 
   const navigate = useNavigate();
